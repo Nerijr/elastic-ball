@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ELASTIC BALL</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Bolinha</h1>
+        <canvas
+            id="gl-canvas"
+            style="border: 2px solid white"
+            width="400"
+            height="400"
+        >
+            Sorry; your web browser does not support HTML5's canvas element.
+        </canvas>
+        <div class="slider">
+            <label for="speed">Velocidade:</label>
+            <input type="range" id="speed" min="1" max="10" value="3" />
+        </div>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            #version 300 es
+
+            in vec4 aPosition;
+            uniform vec2 move;
+
+            void main() {
+                gl_Position.x = aPosition.x + move.x;
+                gl_Position.y = aPosition.y + move.y;
+                gl_Position.z = 0.0;
+                gl_Position.w = 1.0;
+            }
+        </script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            #version 300 es
+
+            precision highp float;
+            out vec4 fColor;
+
+            void main() {
+                fColor = vec4(1.0, 1.0, 1.0, 1.0);
+            }
+        </script>
+
+        <script src="common/initShaders.js"></script>
+        <script src="common/MV.js"></script>
+        <script src="ball.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
